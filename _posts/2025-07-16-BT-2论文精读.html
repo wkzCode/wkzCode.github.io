@@ -1,12 +1,12 @@
 ---
-title: 'BT-2论文精读'
+title: 'RT-2论文精读'
 date: 2025-07-16
 permalink: /posts/2025/07/BT-2/
 tags:
   - 论文精读
   - VLA
 ---
-
+{{ base_path }}/images
 
 <html lang="zh-CN">
 <head>
@@ -285,12 +285,12 @@ tags:
             <p>为此，我们探索了一种既简单又出人意料地有效的方法：直接训练针对开放词汇视觉问答和视觉对话设计的视觉语言模型，使其输出低级机器人动作，同时解决其他大规模的视觉语言任务。尽管这些模型通常被训练以产生自然语言标记，但我们可以使用动作标记化为文本标记并创建“多模态句子”（Driess等人，2023年）来对它们进行训练，从而响应带有相机观察结果的机器人指令，并生成相应的动作。通过这种方式，视觉语言模型可以直接被训练成执行机器人的操作指南。这种方法与之前将视觉语言模型集成到机器人策略中的替代方案（Shridhar等人，2022a）或从头开始设计新的视觉语言行动架构（Reed等人，2022）形成对比：相反，现有的视觉语言模型已经进行了大量的计算投资，没有添加任何新参数就可以进行训练，以输出编码文本的动作。我们将这类模型称为视觉语言行动（VLA）模型。我们在RT-1（Brohan等人，2022）提议的协议的基础上构建了VLA模型，使用类似的语料库，但是将模型扩展到了大型视觉语言主干上。因此，我们称我们的模型为RT-2（机器人变压器2）。请参见图1了解概述。</p>
             <div class="figure-caption">
                 <!-- 你可以用img标签在这里插入图片 -->
-                <img src="./RT-2_figs/RT-2_overview.png" alt="RT-2 Overview">
+                <img src="{{ base_path }}/images/RT-2_figs/RT-2_overview.png" alt="RT-2 Overview">
                 <strong>图1 | RT-2概述：</strong>我们将机器人动作表示为另一种语言，可以将其转换成文本标记，并与互联网规模的视觉语言数据集一起进行训练。在推理过程中，文本标记被解码成机器人动作，从而实现闭环控制。这使我们能够利用视觉语言模型的主干和预训练来学习机器人的策略，将它们的一些泛化、语义理解和推理转移到机器人控制中。
             </div>
             <p>我们观察到，从这样的视觉语言模型中推导出的机器人策略表现出了一系列显著的能力，它将从机器人数据中学到的物理运动与从网络数据中学习到的对图像和文本进行解释的能力结合起来。除了预期的显著提高对新物体和语义上多样的指令的泛化能力外，我们还观察到了一些新兴的能力。虽然该模型的物理技能仍局限于在机器人数据中看到的技能分布，但该模型通过利用来自网络的知识来解释图像和语言命令，获得了以新的方式部署这些技能的能力。一些示例亮点如图 2 所示。该模型能够重新利用从机器人数据中学到的抓取和放置技能，将对象放置在语义指示的位置附近，例如特定数字或图标，尽管机器人数据中没有这些线索。该模型还可以推理对象之间的关系，以确定要选择哪个对象以及将其放在哪里，尽管机器人演示中没有提供这种关系。此外，如果我们在命令中添加思维链提示，模型就能够做出更复杂的语义推理，比如找出哪种物体可以当作锤子（石头）使用，或者哪种类型的饮料最适合疲劳的人（能量饮料）</p>
             <div class="figure-caption">
-                <img src="./RT-2_figs/RT-2_fig2.png" alt="RT-2 Overview">
+                <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig2.png" alt="RT-2 Overview">
                 <strong>图2 | RT-2泛化能力示例：</strong>RT-2能够对各种需要推理、符号理解和人类识别的真实世界情况进行泛化。
             </div>
             <p>我们的主要贡献是 RT-2，这是一个从在 Web 规模数据上训练的大型视觉语言模型微调而来的模型族，直接用作通用且语义感知的机器人策略。我们在互联网数据以及之前工作的带指令注释的机器人轨迹（Brohan等人，2022）上训练了高达 550 亿参数的模型。在 6 千次机器人评估中，我们展示了 RT-2 在对象、场景和指令上的泛化能力显著提升，并表现出源自 Web 规模视觉语言预训练的广泛涌现功能。</p>
@@ -310,7 +310,7 @@ tags:
             </div>
             <div class="figure-caption">
                 <figure>
-                    <img src="./RT-2_figs/RT-2_tab1.png" alt="Language-Table Performance" class="img-medium">
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_tab1.png" alt="Language-Table Performance" class="img-medium">
                     <figcaption>表1 | 模拟语言-表格任务的表现 (Lynch和Ser-manet，2020)。</figcaption>
                 </figure>
             </div>
@@ -359,7 +359,7 @@ tags:
             <p>图 3 展示了示例泛化评估，其中分为未见过的类别（对象、背景和环境），并进一步细分为易类和难类。对于未见过的对象，困难案例包括难以掌握和独特的对象（例如玩具）。对于未见过的背景，困难情况包括更多样化的背景和新奇的对象。最后，对于未见过的环境，困难案例对应于具有显示器和附件的视觉上更明显的办公桌环境，而较容易的环境则为水槽。这些评估由超过 280 项任务组成，主要关注许多不同情况下抓取和放置技能。对未见过类别的指令列表在附录 F.2 中指定。</p>
             <div class="figure-caption">
                 <figure>
-                    <img src="./RT-2_figs/RT-2_fig3.png" alt="Language-Table Performance">
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig3.png" alt="Language-Table Performance">
                     <figcaption>图3 | 图4和6b以及表4和6中用于评估的示例一般化场景。</figcaption>
                 </figure>
             </div>
@@ -456,20 +456,20 @@ tags:
             <p>如图 4 和附录表 4 所示，RT-2 模型在已知任务上的表现与 RT-1 相似，其他基准线的表现要差一些。在各种泛化实验中，RT-2 模型与基线之间的差异最为明显，这表明视觉语言行动模型的优势在于从其大规模预训练数据中转移出更具一般性的视觉和语义概念。在这里，平均而言，RT-2 的两个版本的表现相似，导致相对于下一个基线 RT-1 和 MOO 约有 2 倍的提升，以及相对于其他基线约有 6 倍的提升。PaLM-E 版本的 RT-2 在更困难的一般化场景下似乎比 RT-2-PaLI-X 表现得更好，但在较容易的场景下表现较差，从而导致类似的整体性能。</p>
             <div class="figure-caption">
                 <figure>
-                    <img src="./RT-2_figs/RT-2_fig4.png" alt="Language-Table Performance">
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig4.png" alt="Language-Table Performance">
                     <figcaption>图4 | 在已知训练任务以及对新对象、新背景和新环境的泛化测量中，RT-2 和基线的两个实例的整体性能。附录表 4 细节显示了完整结果。</figcaption>
                 </figure>
             </div>
             <div class="figure-caption">
                 <figure>
-                    <img src="./RT-2_figs/RT-2_tab4.png" alt="Language-Table Performance">
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_tab4.png" alt="Language-Table Performance">
                     <figcaption>表 4：RT-2 的两个实例以及基线在训练任务上的总体性能，以及评估测量泛化到新对象、新背景和新环境。</figcaption>
                 </figure>
             </div>
             <p><strong>开源语言表格基准。</strong>为了提供一个使用开源基线和环境的额外比较点，我们利用了Lynch等人（2022）提供的开源Language-Table模拟环境。我们在几个预测任务上联合微调了一个较小的PaLI 3B模型，包括域内VQA任务，用于Language-Table数据集，并在仿真中评估所得到的策略。对于动作预测任务，我们将动作离散化并编码为文本格式“X Y”，其中X和Y范围从-10到+10，表示末端执行器的二维笛卡尔设定点增量。由于其尺寸减小，生成的模型可以以与其它基线相似的速度（5 Hz）进行推断。本实验的结果如表1所示。我们观察到，在我们的模型与基线相比时，性能显著提升，这表明基于视觉的语言模型预训练加上大型PaLI模型的表达能力可以在其他场景中受益，例如在这个例子中的机器人仿真。我们还在图5中展示了现实世界中样本外行为的质量，演示了新颖的推动任务和以前在这个环境中从未见过的目标物体。</p>
             <div class="figure-caption">
                 <figure>
-                    <img src="./RT-2_figs/RT-2_fig5.png" alt="Language-Table Performance">
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig5.png" alt="Language-Table Performance">
                     <figcaption>图5 | 在语言表环境中出现的现实世界中的分布外行为。使用与表1中相同的RT-2-PaLI-3B模型检查点。 </figcaption>
                 </figure>
             </div>
@@ -496,14 +496,14 @@ tags:
             </ol>
             <div class="figure-caption">
                 <figure>
-                    <img src="./RT-2_figs/RT-2_fig8.png" alt="Language-Table Performance">
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig8.png" alt="Language-Table Performance">
                     <figcaption>图8：使用 RT-2 研究其涌现能力的一些评估场景的概述。它们侧重于三个大类，即（a）推理、(b)符号理解以及 (c)人类识别。可视化指令是完整指令的一个子集，完整指令列在附录F.2中。 </figcaption>
                 </figure>
             </div>
             <p>我们在图6(a)中展示了实验结果，所有数值结果在附录H.2中。</p>
             <div class="figure-caption">
                 <figure>
-                    <img src="./RT-2_figs/RT-2_fig6a.png" alt="Language-Table Performance" class="img-large">
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig6a.png" alt="Language-Table Performance" class="img-large">
                     <figcaption>图6(a)：RT-2与两个基线在各种紧急技能评估上的性能比较（图8）</figcaption>
                 </figure>
             </div>
@@ -512,7 +512,7 @@ tags:
                 <p>表5列出了我们所有的定量涌现性评估结果。 我们发现，与 RT-1 相比，RT-2 在这些新指令上的性能提高了 2 到 3 倍，而且不需要额外的机器人演示。 这证明了我们的方法如何利用预训练来提高在大规模视觉语言数据集上进行推理的能力。</p>
                 <div class="figure-caption">
                     <figure>
-                        <img src="./RT-2_figs/RT-2_tab5.png" alt="Language-Table Performance">
+                        <img src="{{ base_path }}/images/RT-2_figs/RT-2_tab5.png" alt="Language-Table Performance">
                         <figcaption>表5：RT-2 和基线在定量新兴评估上的性能。</figcaption>
                     </figure>
                 </div>
@@ -523,7 +523,7 @@ tags:
             <p>在图6b和附录表6中展示了消融实验的结果。</p>
             <div class="figure-caption">
                 <figure>
-                    <img src="./RT-2_figs/RT-2_fig6b.png" alt="Language-Table Performance" class="img-large">
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig6b.png" alt="Language-Table Performance" class="img-large">
                     <figcaption>图6(b)：对RT-2-PaLI-X的消融研究，展示了参数数量和训练策略对泛化的影响。</figcaption>
                 </figure>
             </div>
@@ -532,7 +532,7 @@ tags:
                 <p>表6详细说明了模型大小和训练方法对消融的影响。我们发现，无论是在哪方面，模型大小都对性能有重要影响，联合微调优于微调，而微调又优于从头开始训练。</p>
                 <div class="figure-caption">
                     <figure>
-                        <img src="./RT-2_figs/RT-2_tab6.png" alt="Language-Table Performance">
+                        <img src="{{ base_path }}/images/RT-2_figs/RT-2_tab6.png" alt="Language-Table Performance">
                         <figcaption>表6：RT-2的消融展示了参数数量和训练策略对泛化的影响。</figcaption>
                     </figure>
                 </div>
@@ -543,7 +543,7 @@ tags:
             <p>我们定性观察到，采用思维链推理的RT-2能够响应更复杂的指令，这得益于它首先获得了用自然语言规划行动的空间。这一发现为以下观点提供了初步证据：将大型语言模型或视觉语言模型作为规划器（Ahn等人，2022；Driess等人，2023）与底层策略整合到单一视觉语言行动模型中具有可行性。图7和附录I展示了采用思维链推理的RT-2的运行实例。</p>
             <div class="figure-caption">
                 <figure>
-                    <img src="./RT-2_figs/RT-2_fig7.png" alt="Language-Table Performance" class="img-large">
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig7.png" alt="Language-Table Performance" class="img-large">
                     <figcaption>图7：使用链式推理的RT-2推出，其中RT-2生成计划和行动。 </figcaption>
                 </figure>
             </div>
@@ -552,7 +552,7 @@ tags:
                 <p>我们在图 10 中提供了使用 RT-2-PaLM-E 完成的思维链推理推演的更多示例，如第 4.4 节所述。</p>
                 <div class="figure-caption">
                     <figure>
-                        <img src="./RT-2_figs/RT-2_fig10.png" alt="Language-Table Performance">
+                        <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig10.png" alt="Language-Table Performance">
                         <figcaption>图10：具有思维链推理的RT-2的其他示例</figcaption>
                     </figure>
                 </div>
@@ -564,7 +564,7 @@ tags:
                 <p>在图9中，我们提供了语言表设置中一种值得注意的失败类型的示例，其中RT-2模型不能推广到未见过的对象动力学。在这种情况下，尽管该模型能够正确地关注语言指令并移动到第一个正确的对象，但它无法控制这些对象具有挑战性的动力学，这些对象的动力学与在此环境中看到的小型积木对象集（Lynch等人，2022）大不相同。然后，钢笔会从桌子上滚下来（图9左），而香蕉的质心远离机器人接触的位置（图9右）。我们注意到，推动动力学通常很难预测和控制（Yu等人，2016）。我们假设通过进一步扩展包含各种环境和物体的数据集，可能可以在机器人-环境相互作用动力学方面实现更大的泛化——例如，在这种情况下，数据集包括类似类型的各种更复杂的推动力学（Dasari等人，2019）。</p>
                 <div class="figure-caption">
                     <figure>
-                        <img src="./RT-2_figs/RT-2_fig9.png" alt="Language-Table Performance">
+                        <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig9.png" alt="Language-Table Performance">
                         <figcaption>图9：定性示例失败案例在现实世界中未能推广到看不见的对象动力学。</figcaption>
                     </figure>
                 </div>
