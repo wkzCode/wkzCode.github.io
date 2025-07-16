@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default"
-title                    : "Kunzhi Wang / Site Title"
+title                    : "Kunzhi Wang"
 title_separator          : "-"
 name                     : &name "Kunzhi Wang"
 description              : &description "personal description"
