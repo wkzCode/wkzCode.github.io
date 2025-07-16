@@ -1,3 +1,9 @@
+---
+layout: single
+title: "我的自定义博客"
+date: 2024-06-10
+categories: blog
+---
 # RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control
 
 ## 论文翻译
