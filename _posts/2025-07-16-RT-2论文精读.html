@@ -516,12 +516,12 @@ tags:
             <div class="appendix-box">
                 <h3>附录H.2. Emergent Evaluation, for Section 4.2</h3>
                 <p>表5列出了我们所有的定量涌现性评估结果。 我们发现，与 RT-1 相比，RT-2 在这些新指令上的性能提高了 2 到 3 倍，而且不需要额外的机器人演示。 这证明了我们的方法如何利用预训练来提高在大规模视觉语言数据集上进行推理的能力。</p>
-                <div class="figure-caption">
-                    <figure>
-                        <img src="{{ base_path }}/images/RT-2_figs/RT-2_tab5.png" alt="Language-Table Performance">
-                        <figcaption>表5：RT-2 和基线在定量新兴评估上的性能。</figcaption>
-                    </figure>
-                </div>
+            </div>
+            <div class="figure-caption">
+                <figure>
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_tab5.png" alt="Language-Table Performance">
+                    <figcaption>表5：RT-2 和基线在定量新兴评估上的性能。</figcaption>
+                </figure>
             </div>
             <p>我们观察到，我们的 VLA 模型在所有类别上都显著优于基线，其中我们的最佳 RT-2-PaLI-X 模型比下一个最佳基线（RT-1）平均成功率高出三倍多。我们还注意到，虽然基于 PaLI-X 的较大模型在平均符号理解、推理和人脸识别方面表现更好，但基于 PaLM-E 的较小模型在涉及数学推理的任务上具有优势。我们将这一有趣的结果归因于 PaLM-E 中使用的预训练混合不同，从而产生了一个在数学计算方面比主要基于视觉预训练的 PaLI-X 更加擅长的模型。</p>
             <h4>4.3. 参数数量和其他设计决策如何影响泛化？</h4>
@@ -549,19 +549,19 @@ tags:
             <p>我们定性观察到，采用思维链推理的RT-2能够响应更复杂的指令，这得益于它首先获得了用自然语言规划行动的空间。这一发现为以下观点提供了初步证据：将大型语言模型或视觉语言模型作为规划器（Ahn等人，2022；Driess等人，2023）与底层策略整合到单一视觉语言行动模型中具有可行性。图7和附录I展示了采用思维链推理的RT-2的运行实例。</p>
             <div class="figure-caption">
                 <figure>
-                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig7.png" alt="Language-Table Performance" class="img-large">
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig7.png" alt="Language-Table Performance" >
                     <figcaption>图7：使用链式推理的RT-2推出，其中RT-2生成计划和行动。 </figcaption>
                 </figure>
             </div>
             <div class="appendix-box">
                 <h3>附录I. Additional Chain-Of-Thought Reasoning Results</h3>
                 <p>我们在图 10 中提供了使用 RT-2-PaLM-E 完成的思维链推理推演的更多示例，如第 4.4 节所述。</p>
-                <div class="figure-caption">
-                    <figure>
-                        <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig10.png" alt="Language-Table Performance">
-                        <figcaption>图10：具有思维链推理的RT-2的其他示例</figcaption>
-                    </figure>
-                </div>
+            </div>
+            <div class="figure-caption">
+                <figure>
+                    <img src="{{ base_path }}/images/RT-2_figs/RT-2_fig10.png" alt="Language-Table Performance">
+                    <figcaption>图10：具有思维链推理的RT-2的其他示例</figcaption>
+                </figure>
             </div>
             <h3>5. Limitations</h3>
             <p>尽管 RT-2 展示了很有前途的一般化特性，但这种方法存在多个局限性。首先，虽然我们证明通过 VLM 进行基于 Web 的预训练可以提高对语义和视觉概念的一般化能力，但机器人不会通过包含这种额外经验来获得执行新动作的能力。模型的物理技能仍然局限于机器人数据中看到的技能分布（见附录G），但它学会了以新的方式部署这些技能。我们认为这是由于数据集在技能轴上不够多样化所致。未来研究的一个令人兴奋的方向是研究如何通过收集人类视频等新的数据收集范例来学习新的技能。</p>
