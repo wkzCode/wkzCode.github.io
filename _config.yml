@@ -204,6 +204,7 @@ incremental: false
 
 # Markdown Processing
 kramdown:
+  math_engine: katex
   input: GFM
   hard_wrap: false
   auto_ids: true
